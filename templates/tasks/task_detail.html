@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <!-- Інформація про завдання -->
+  <div class="card bg-dark text-light shadow-lg mb-4">
+    <div class="card-body">
+      <h2 class="card-title">{{ task.title }}</h2>
+      <p class="card-text">{{ task.description }}</p>
+      <p>
+        <strong>Статус:</strong>
+        <span class="badge bg-info text-dark">{{ task.status }}</span>
+      </p>
+      <p>
+        <strong>Пріоритет:</strong>
+        <span class="badge bg-secondary">{{ task.priority }}</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Додати коментар -->
+  <div class="card bg-dark text-light shadow-lg mb-4">
+    <div class="card-header bg-primary text-white">
+      ➕ Додати коментар
+    </div>
+    <div class="card-body">
+      <form method="post" class="mb-0">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit" class="btn btn-success">
+          💬 Надіслати
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Список коментарів -->
+  <div class="card bg-dark text-light shadow-lg">
+    <div class="card-header bg-secondary text-white">
+      📝 Коментарі
+    </div>
+    <div class="card-body">
+      {% if task.comments.all %}
+        <ul class="list-group list-group-flush">
+          {% for comment in task.comments.all %}
+            <li class="list-group-item bg-dark text-light border-secondary">
+              <div class="d-flex justify-content-between">
+                <strong>{{ comment.author }}</strong>
+                <small class="text-muted">{{ comment.created_at }}</small>
+              </div>
+              <p class="mb-2">{{ comment.content }}</p>
+
+              {% if user == comment.author %}
+                <a href="{% url 'comment-edit' comment.pk %}" class="btn btn-warning btn-sm">✏️ Редагувати</a>
+                <a href="{% url 'comment-delete' comment.pk %}" class="btn btn-danger btn-sm">🗑 Видалити</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted">Коментарів поки немає.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

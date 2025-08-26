@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="card bg-dark text-light shadow-lg p-4" style="width: 400px;">
+    <h2 class="text-center mb-4">🔑 Вхід</h2>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary w-100">Увійти</button>
+    </form>
+    <div class="text-center mt-3">
+      <a href="{% url 'register' %}" class="text-decoration-none text-info">
+        Не маєте акаунта? Зареєструйтесь
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

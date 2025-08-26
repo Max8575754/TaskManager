@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="card bg-dark text-light shadow-lg p-4" style="width: 420px;">
+    <h2 class="text-center mb-4">📝 Реєстрація</h2>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="mb-3">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {{ form.username.errors }}
+      </div>
+
+      <div class="mb-3">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+        {{ form.password1.errors }}
+      </div>
+
+      <div class="mb-3">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+      </div>
+
+      <button type="submit" class="btn btn-success w-100">✅ Зареєструватися</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <a href="{% url 'login' %}" class="text-decoration-none text-info">
+        Уже маєте акаунт? Увійдіть
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
