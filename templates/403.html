@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1>⛔ Доступ заборонено</h1>
+    <p>У вас немає прав доступу до цієї сторінки.</p>
+    <a href="{% url 'task-list' %}" class="btn btn-primary">На головну</a>
+</div>
+{% endblock %}

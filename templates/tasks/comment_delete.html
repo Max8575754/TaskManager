@@ -2,11 +2,11 @@
 
 {% block content %}
 <div class="container mt-3">
-    <h2>This comment will be deleted. Are you sure??</h2>
+    <h2>Ви впевнені що хочете видалити коментар?</h2>
     <form method="post">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a href="{% url 'task-list' %}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-danger">Видалити</button>
+        <a href="{% url 'task-list' %}" class="btn btn-secondary">Скасувати</a>
     </form>
 </div>
 {% endblock %}
